@@ -26,7 +26,6 @@
 /* Begin PBXFileReference section */
 		CE4DBDD41FA51FA100A66A5A /* p3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = p3; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE4DBDDE1FA5260300A66A5A /* minHeap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = minHeap.h; sourceTree = SOURCE_ROOT; };
-		CE4DBDDF1FA5260D00A66A5A /* Node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = SOURCE_ROOT; };
 		CE4DBDE21FA526E800A66A5A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		CE4DBDE51FA526FC00A66A5A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -46,7 +45,6 @@
 			isa = PBXGroup;
 			children = (
 				CE4DBDE21FA526E800A66A5A /* main.cpp */,
-				CE4DBDDF1FA5260D00A66A5A /* Node.h */,
 				CE4DBDDE1FA5260300A66A5A /* minHeap.h */,
 				CE4DBDE51FA526FC00A66A5A /* README.md */,
 				CE4DBDD51FA51FA100A66A5A /* Products */,
