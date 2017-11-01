@@ -12,7 +12,8 @@
 using namespace std;
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
-    return 0;
+    minHeap heap;
+    
+    heap.insert(90);
+    heap.print(heap.root);
 }

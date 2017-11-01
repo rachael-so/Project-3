@@ -30,16 +30,15 @@ private:
     int size;
     int *array;
     int numItems;
-    int root;
-    
+
 public:
     minHeap();
-    minHeap(int,int);
     ~minHeap();
     void insert(int);
     void remove();
     void resize();
-    void print(minHeap);
+    void print(int*);
+    int *root;
 };
 
 minHeap::minHeap()
@@ -47,12 +46,7 @@ minHeap::minHeap()
     this->size = 10;
     this->array = new int[size];
     this->numItems = 0;
-}
-
-minHeap::minHeap(int size, int numItems) {
-    this->size = size;
-    this->array = new int[size];
-    this->numItems = numItems;
+    this->root = array;
 }
 
 minHeap::~minHeap()
@@ -62,7 +56,6 @@ minHeap::~minHeap()
 
 void minHeap::insert(int val)
 {
-    
     if (numItems == size) {
         resize();
         insert(val);
@@ -72,8 +65,8 @@ void minHeap::insert(int val)
         while (val < array[hole/2]) {
             array[hole] = array[hole/2];
             hole = hole/2;
-            array[hole] = val;
         }
+        array[hole-1] = val;
     }
 }
 
@@ -96,7 +89,6 @@ void minHeap::remove()
             break;
     }
     array[hole] = temp;
-    
 }
 
 void minHeap::resize()
@@ -110,13 +102,13 @@ void minHeap::resize()
     delete[] doubled;
 }
 
-void minHeap::print(minHeap heap)
+void minHeap::print(int *heapRoot)
 {
-    int root = 1;
-    cout << heap.array[root-1];
-    cout << "[" << heap.array[root*2-1] << "]";
-    
-    
+//    int* left = heapRoot * 2;
+//    int right = *(heapRoot * 2 + 1);
+    cout << *heapRoot << endl;
+//    cout << " [" << *heapRoot * 2 - 1 << "]";
+//    cout << " [" << *heapRoot * 2 << "]";
     
 }
 
