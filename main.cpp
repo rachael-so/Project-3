@@ -7,32 +7,33 @@
 //
 
 #include <iostream>
+#include <sstream>
 #include "minHeap.h"
 
 using namespace std;
 
 int main(int argc, const char * argv[]) {
     minHeap heap;
+    bool quit = false;
     
-    heap.insert(90);
-    cout << endl;
-    heap.insert(100);
-    cout << endl;
-    heap.insert(10);
-    cout << endl;
-    heap.insert(16);
-    cout << endl;
-    heap.insert(88);
-    cout << endl;
-    heap.insert(1);
-    cout << endl;
-    cout << "calling remove\n";
-    heap.remove();
-    cout << endl;
-    heap.remove();
-    cout << endl;
-    heap.remove();
-    cout << endl;
-    heap.remove();
-    cout << endl;
+    while (quit == false) {
+        string ans;
+        cout << "add to heap (a key), remove from heap (r), quit (q): ";
+        getline(cin, ans);
+        if (ans == "q")
+            quit = true;
+        else if (ans == "r") {
+            heap.remove();
+        }
+        else {
+            istringstream info(ans);
+            char letter;
+            int key;
+            while (info >> letter >> key) {
+                if (letter == 'a') {
+                    heap.insert(key);
+                }
+            }
+        }
+    }
 }

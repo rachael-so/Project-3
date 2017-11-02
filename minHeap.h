@@ -65,29 +65,36 @@ void minHeap::insert(int val)
     numItems++;
     
     print(1);
+    cout << endl;
 }
 
 void minHeap::remove()
 {
-    int temp = array[numItems];
-    numItems--;
-    int hole = 1;
+    out_of_range e1("nothing to remove");
     
-    while (hole <= numItems) { //while there exists a child traverse down
-        int child = hole * 2; //check left child
-        if (child != numItems && array[child+1] < array[child]) {
-            child++;
+    try {
+        if (numItems == 1) {
+            throw e1;
         }
-        if (array[child] < temp) {
-            array[hole] = array[child];
-            hole = child;
+        else {
+            numItems--;
+            int hole = 1;
+
+            while (hole <= numItems) {
+                int child = hole * 2;
+                if (child != numItems && array[child+1] < array[child])
+                    child++;
+                array[hole] = array[child];
+                hole = child;
+            }
+            
+            print(1);
+            cout << endl;
         }
-        else
-            break;
     }
-    array[hole] = temp;
-    
-    print(1);
+    catch (out_of_range &e1) {
+        cout << e1.what() << endl;
+    }
 }
 
 void minHeap::resize()
@@ -103,23 +110,35 @@ void minHeap::resize()
 
 void minHeap::print(int heapRoot)
 {
-//    cout << "in print method for heapRoot of " << heapRoot << " ";
-    int left = heapRoot * 2;
-    int right = heapRoot * 2 + 1;
-//    cout << "left: " << left << " ";
-//    cout << "right: " << right << " " << endl;
-    cout << array[heapRoot];
-    if (left < numItems) {
-//        cout << "this is left: " << left << " " << array[left];
-        cout << " [";
-        print(left);
-        cout << "]";
+    out_of_range e1("heap is empty");
+    
+    try {
+        if (numItems == 1) {
+            throw e1;
+        }
+        else {
+        //    cout << "in print method with root: " << array[heapRoot] << endl;
+            int left = heapRoot * 2;
+            int right = heapRoot * 2 + 1;
+        //    cout << "left: " << left << " ";
+        //    cout << "right: " << right << " " << endl;
+            cout << array[heapRoot];
+            if (left < numItems) {
+        //        cout << "this is left: " << left << " " << array[left];
+                cout << " [";
+                print(left);
+                cout << "]";
+            }
+            if (right < numItems) {
+        //        cout << "this is right: " << right << " " << array[right];
+                cout << " [";
+                print(right);
+                cout << "]";
+            }
+        }
     }
-    if (right < numItems) {
-//        cout << "this is right: " << right << " " << array[right];
-        cout << " [";
-        print(right);
-        cout << "]";
+    catch (out_of_range &e1) {
+        cout << e1.what() << endl;
     }
 }
 
