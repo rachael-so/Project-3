@@ -24,8 +24,6 @@ using namespace std;
 
 class minHeap
 {
-//    friend std::ostream& operator<<(std::ostream& os, const minHeap& rhs);
-
 private:
     int size;
     int *array;
@@ -37,16 +35,14 @@ public:
     void insert(int);
     void remove();
     void resize();
-    void print(int*);
-    int *root;
+    void print(int);
 };
 
 minHeap::minHeap()
 {
-    this->size = 10;
+    this->size = 2;
     this->array = new int[size];
-    this->numItems = 0;
-    this->root = array;
+    this->numItems = 1;
 }
 
 minHeap::~minHeap()
@@ -58,16 +54,17 @@ void minHeap::insert(int val)
 {
     if (numItems == size) {
         resize();
-        insert(val);
     }
-    else {
-        int hole = numItems = numItems + 1;
-        while (val < array[hole/2]) {
-            array[hole] = array[hole/2];
-            hole = hole/2;
-        }
-        array[hole-1] = val;
+    int hole = numItems;
+    while (val < array[hole/2]) {
+        array[hole] = array[hole/2];
+        hole = hole/2;
     }
+    array[hole] = val;
+//    cout << "inserting: " << val << " at index: " << hole << endl;
+    numItems++;
+    
+    print(1);
 }
 
 void minHeap::remove()
@@ -89,33 +86,41 @@ void minHeap::remove()
             break;
     }
     array[hole] = temp;
+    
+    print(1);
 }
 
 void minHeap::resize()
 {
-    int* doubled = new int[size * 1];
-    for(int i = 0; i < numItems-1; i++)
-        doubled[i] = array[i];
+    size *= 2;
+    int *temp = new int[size];
+    for(int i = 0; i < size; i++)
+        temp[i] = array[i];
     
-    size++;
-    array = doubled;
-    delete[] doubled;
+    delete [] array;
+    array = temp;
 }
 
-void minHeap::print(int *heapRoot)
+void minHeap::print(int heapRoot)
 {
-//    int* left = heapRoot * 2;
-//    int right = *(heapRoot * 2 + 1);
-    cout << *heapRoot << endl;
-//    cout << " [" << *heapRoot * 2 - 1 << "]";
-//    cout << " [" << *heapRoot * 2 << "]";
-    
+//    cout << "in print method for heapRoot of " << heapRoot << " ";
+    int left = heapRoot * 2;
+    int right = heapRoot * 2 + 1;
+//    cout << "left: " << left << " ";
+//    cout << "right: " << right << " " << endl;
+    cout << array[heapRoot];
+    if (left < numItems) {
+//        cout << "this is left: " << left << " " << array[left];
+        cout << " [";
+        print(left);
+        cout << "]";
+    }
+    if (right < numItems) {
+//        cout << "this is right: " << right << " " << array[right];
+        cout << " [";
+        print(right);
+        cout << "]";
+    }
 }
-
-//ostream& operator<<(ostream& os, const minHeap& rhs)
-//{
-//    return os;
-//}
-
 
 #endif /* minHeap_h */
