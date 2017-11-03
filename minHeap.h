@@ -34,6 +34,7 @@ public:
     ~minHeap();
     void insert(int);
     void remove();
+    void swapDown(int);
     void resize();
     void print(int);
 };
@@ -79,14 +80,10 @@ void minHeap::remove()
         else {
             numItems--;
             int hole = 1;
-
-            while (hole <= numItems) {
-                int child = hole * 2;
-                if (child != numItems && array[child+1] < array[child])
-                    child++;
-                array[hole] = array[child];
-                hole = child;
-            }
+            int temp = array[numItems];
+            array[hole] = temp;
+            
+            swapDown(hole);
             
             print(1);
             cout << endl;
@@ -94,6 +91,24 @@ void minHeap::remove()
     }
     catch (out_of_range &e1) {
         cout << e1.what() << endl;
+    }
+}
+
+void minHeap::swapDown(int hole)
+{
+    int child = hole * 2;
+    if (child >= numItems) {
+        return;
+    }
+    if (child + 1 < numItems && array[child] > array[child+1]) {
+        child++;
+    }
+    if (array[hole] >= array[child]) {
+        int temp = array[hole];
+        array[hole] = array[child];
+        array[child] = temp;
+        hole = child;
+        swapDown(hole);
     }
 }
 
@@ -141,5 +156,24 @@ void minHeap::print(int heapRoot)
         cout << e1.what() << endl;
     }
 }
+
+//numItems--;
+//int temp = array[numItems];
+//int hole = 1;
+//array[hole] = temp;
+//cout << "hole: " << array[hole] << endl;
+//cout << "temp: " << temp << endl;
+//
+//while (hole <= numItems) {
+//    int child = hole * 2;
+//    if (child != numItems && array[child+1] < array[child])
+//        child++;
+//    if (array[child] <= temp) {
+//        array[hole] = array[child];
+//        array[child] = temp;
+//    }
+//    hole = child;
+//}
+
 
 #endif /* minHeap_h */
